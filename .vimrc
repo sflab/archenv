@@ -228,98 +228,6 @@ augroup vimrcex
     \ endif
 augroup end
 
-""""""""""""""""""""""""""""""
-"挿入モード時、ステータスラインの色を変更
-""""""""""""""""""""""""""""""
-"let g:hi_insert = 'highlight statusline guifg=darkblue guibg=darkyellow gui=none ctermfg=blue ctermbg=yellow cterm=none'
-
-"if has('syntax')
-"  augroup inserthook
-"    autocmd!
-"    autocmd insertenter * call s:statusline('enter')
-"    autocmd insertleave * call s:statusline('leave')
-"  augroup end
-"endif
-" if has('unix') && !has('gui_running')
-"   " escでキー入力待ちになる対策
-"   inoremap <silent> <esc> <esc>
-" endif
-
-"let s:slhlcmd = ''
-"function! s:statusline(mode)
-"  if a:mode == 'enter'
-"    silent! let s:slhlcmd = 'highlight ' . s:gethighlight('statusline')
-"    silent exec g:hi_insert
-"  else
-"    highlight clear statusline
-"    silent exec s:slhlcmd
-"    redraw
-"  endif
-"endfunction
-
-"function! s:gethighlight(hi)
-"  redir => hl
-"  exec 'highlight '.a:hi
-"  redir end
-"  let hl = substitute(hl, '[\r\n]', '', 'g')
-"  let hl = substitute(hl, 'xxx', '', '')
-"  return hl
-"endfunction
-
-""""""""""""""""""""""""""""""
-"全角スペースを表示
-""""""""""""""""""""""""""""""
-"コメント以外で全角スペースを指定しているので、scriptencodingと、
-"このファイルのエンコードが一致するよう注意！
-"強調表示されない場合、ここでscriptencodingを指定するとうまくいく事があります。
-"scriptencoding cp932
-
-"デフォルトのzenkak"uspaceを定義
-"function! zenkakuspace()
-"  highlight zenkakuspace cterm=underline ctermfg=darkgrey gui=underline guifg=darkgrey
-"endfunction
-
-"if has('syntax')
-"  augroup zenkakuspace
-"    autocmd!
-"    " zenkakuspaceをカラーファイルで設定するなら次の行は削除
-"    autocmd colorscheme       * call zenkakuspace()
-"    " 全角スペースのハイライト指定
-"    autocmd vimenter,winenter * match zenkakuspace /　/
-"  augroup end
-"  call zenkakuspace()
-"endif
-
-""""""""""""""""""""""""""""""
-"grep,tagsのためカレントディレクトリをファイルと同じディレクトリに移動する
-""""""""""""""""""""""""""""""
-"if exists('+autochdir')
-"  "autochdirがある場合カレントディレクトリを移動
-"  set autochdir
-"else
-"  "autochdirが存在しないが、カレントディレクトリを移動したい場合
-"  au bufenter * execute ":silent! lcd " . escape(expand("%:p:h"), ' ')
-"endif
-
-""""""""""""""""""""""""""""""
-"windowsで内部エンコーディングがcp932以外の場合
-"makeのメッセージが化けるのを回避
-""""""""""""""""""""""""""""""
-"if has('win32') || has('win64') || has('win95') || has('win16')
-"  au quickfixcmdpost make call qfixcnv('cp932')
-"endif
-"
-"function! qfixcnv(enc)
-"  if a:enc == &enc
-"    return
-"  endif
-"  let qflist = getqflist()
-"  for i in qflist
-"    let i.text = iconv(i.text, a:enc, &enc)
-"  endfor
-"  call setqflist(qflist)
-"endfunction
-
 "----------------------------------------
 " 各種プラグイン設定
 "----------------------------------------
@@ -337,7 +245,3 @@ Bundle 'Shougo/vimproc'
 "Bundle 'thinca/vim-ref'
 "Bundle 'kana/vim-fakeclip'
 Bundle 'kannokanno/unite-todo'
-
-"----------------------------------------
-" 一時設定
-"----------------------------------------
